@@ -4,7 +4,7 @@ import { EMAChart } from './charts/EMAChart';
 import { MACDHistogram } from './charts/MACDHistogram';
 import { MACDLineChart } from './charts/MACDLineChart';
 import DisplayCoin from './display/DisplayCoin';
-import { LineChart } from './sample_charts/LineChart';
+
 
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
     <DisplayCoin
     
     />
-
+    <MACDLineChart />
+    
     <MACDHistogram />
 
 
