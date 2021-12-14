@@ -12,7 +12,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import faker from 'faker';
 import axios from 'axios'
-import {useEffect} from 'react'
 
 
 const key = 'KB26K4SV9OF3UUKK'
@@ -20,9 +19,11 @@ var coin = "BTC"
 var fiat = "USD"
 var interval = "daily"
 var time_period =7
-var url = `https://www.alphavantage.co/query?function=EMA&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=open&apikey=${key}`;
+var url = `https://www.alphavantage.co/query?function=MACD&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=open&apikey=${key}`;
 
-var emaArr = []
+var macdArr = []
+var signalArr = []
+var histArr = []
 var dateArr = []
 var headersList = {
     'User-Agent': 'request'
@@ -31,19 +32,31 @@ var headersList = {
 axios.get(url, {headers: headersList,
     
 }).then((response) =>{
-    var info = response.data["Technical Analysis: EMA"]
-    // console.log(response.data)
+    var info = response.data["Technical Analysis: MACD"]
+    console.log(info['2019-04-23']['MACD'])
 
     if (info.Note === undefined){
         
         for(const key of Object.keys(info)){
           dateArr.unshift(key)
-          for(const emaKey of Object.keys(info[key])){ 
-            emaArr.unshift(info[key][emaKey])
+          for(const macdKey of Object.keys(info[key])){
+              if(macdKey === 'MACD'){
+                  macdArr.unshift(info[key][macdKey])
+              }
+              if(macdKey === 'MACD_Signal'){
+                  signalArr.unshift(info[key][macdKey])
+              }
+              if(macdKey === 'MACD_Hist'){
+                histArr.unshift(info[key][macdKey])
+            }
+            //   console.log(macd) 
+            // MACDArr.unshift(info[key][emaKey])
           }
         }
     }
-    console.log(emaArr)   
+    console.log(macdArr)   
+
+
     }
     
 )
@@ -71,7 +84,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'EMA',
+      text: 'MACD',
     },
     label:{
       display: false
@@ -79,7 +92,6 @@ export const options = {
   },
 };
 
-// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const labels = dateArr
 
 
@@ -91,22 +103,24 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'EMA',
-      // data: [1,2,3,4,5,100],
-      data: emaArr,
+      label: 'MACD',
+    //   data: [1,2,3,4,5,100],
+    //   data: labels.map(() => [...macdArr]),
+      data: macdArr,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
-    // {
-    //   label: 'Dataset 2',
-    //   data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    //   borderColor: 'rgb(53, 162, 235)',
-    //   backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    // },
+    {
+      label: 'Signal',
+    //   data: labels.map(() => [...signalArr]),
+        data: signalArr,
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
   ],
 };
 
-export function EMAChart() {
+export function MACDLineChart() {
      
   return <Line options={options} data={data} />;
 }
