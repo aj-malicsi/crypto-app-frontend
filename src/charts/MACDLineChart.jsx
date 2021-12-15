@@ -92,7 +92,7 @@ export function MACDLineChart() {
       var fiat = "USD"
       var interval = "daily"
       var time_period =7
-      var url = `https://www.alphavantage.co/query?function=MACD&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=open&apikey=${key}`;
+      var url = `https://www.alphavantage.co/query?function=MACD&symbol=${coin}${fiat}&interval=${interval}&series_type=open&apikey=${key}`;
       var headersList = {
           'User-Agent': 'request'
       }

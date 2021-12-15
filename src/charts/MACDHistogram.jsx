@@ -100,7 +100,8 @@ export function MACDHistogram() {
         var fiat = "USD"
         var interval = "daily"
         var time_period =7
-        var url = `https://www.alphavantage.co/query?function=MACD&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=open&apikey=${key}`;
+        var series_type = "close"
+        var url = `https://www.alphavantage.co/query?function=MACD&symbol=${coin}${fiat}&interval=${interval}&series_type=${series_type}&apikey=${key}`;
         var headersList = {
             'User-Agent': 'request'
         }
