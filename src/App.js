@@ -5,6 +5,7 @@ import { MACDHistogram } from './charts/MACDHistogram';
 import { MACDLineChart } from './charts/MACDLineChart';
 import { RSIChart } from './charts/RSIChart';
 import DisplayCoin from './display/DisplayCoin';
+import CandlestickExample from './sample_charts/CandlestickSample';
 
 
 
@@ -15,7 +16,8 @@ function App() {
     <DisplayCoin
     
     />
-    <RSIChart />
+    <CandlestickExample />
+   
 
 
 
