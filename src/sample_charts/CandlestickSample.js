@@ -45,6 +45,7 @@ class CandlestickExample extends Component {
 	}
 	componentDidMount(){
 		var chart = this.chart;
+		//hehe
 
 		var url = 'https://canvasjs.com/data/gallery/react/microsoft-stock-price.json'
 		var headersList = {
