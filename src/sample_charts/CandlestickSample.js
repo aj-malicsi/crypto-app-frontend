@@ -14,6 +14,7 @@ var dataPoints =[];
 class CandlestickExample extends Component {
 	render() {
 		const options = {
+			zoomEnabled: true,
 			exportEnabled: true,
 			title: {
 				text: "Microsoft Corporation Stock Price - December 2017"
@@ -23,11 +24,13 @@ class CandlestickExample extends Component {
 			},
 			axisY: {
 				title: "Price",
-				prefix: "$"
+				prefix: "$",
+				spacing: 50
 			},
 			data: [{
 				type: "candlestick",
 				name: "Bitcoin Price",
+				color: "green",
 				showInLegend: true,
 				yValueFormatString: "$#####.##",
 				xValueType: "dateTime",
@@ -45,6 +48,7 @@ class CandlestickExample extends Component {
 	}
 	componentDidMount(){
 		var chart = this.chart;
+		//hehe
 
 		var url = 'https://canvasjs.com/data/gallery/react/microsoft-stock-price.json'
 		var headersList = {
@@ -89,18 +93,37 @@ class CandlestickExample extends Component {
         ).then(function (data){
 			var info = data['Time Series Crypto (5min)']
 			console.log(info)
+			let limit = 0;
 			for(const key of Object.keys(info)){
+				
                 // dataPoints.push({y: key})
 				// console.log(info[key])
 				
 				// console.log(key)
 				let ohlc = []
-				ohlc.push(info[key]['1. open'], info[key]['2. high'], info[key]['3. low'], info[key]['4. close'])
+				ohlc.push(parseFloat(info[key]['1. open']), 
+				parseFloat(info[key]['2. high']), 
+				parseFloat(info[key]['3. low']), 
+				parseFloat(info[key]['4. close'])
+				)
 				// console.log(ohlc)
-				dataPoints.push({
-					x: key,
-					y: ohlc
-				})	
+				let date = new Date(key)
+				console.log("key",key,"date", date)
+
+				limit+=1
+				if(limit < 100){
+					dataPoints.push({
+						x: date,
+						y: ohlc
+					})
+
+				}
+					
+
+			
+				
+				
+				
 			}
 			console.log("data points axios",dataPoints)
 			chart.render();
