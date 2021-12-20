@@ -13,7 +13,7 @@ function DisplayCoin(props){
     useEffect( () =>{
         
         const key = 'KB26K4SV9OF3UUKK'
-        var coin = "BTC"
+        var coin = props.coin
         var fiat = "USD"
         var url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${coin}&to_currency=${fiat}&apikey=${key}`;
 
@@ -22,19 +22,19 @@ function DisplayCoin(props){
             
         }
 
-        // axios.get(url, {headers: headersList,
+        axios.get(url, {headers: headersList,
         
-        // }).then((response) =>{
-        //     var info = response.data
-        //     console.log(response)
+        }).then((response) =>{
+            var info = response.data
+            console.log(response)
 
-        //     if (info.Note === undefined){
-        //         // console.log(info["Realtime Currency Exchange Rate"]["1. From_Currency Code"])
-        //         setCoinInfo(info)
-        //     }
+            if (info.Note === undefined){
+                // console.log(info["Realtime Currency Exchange Rate"]["1. From_Currency Code"])
+                setCoinInfo(info)
+            }
                     
-        //     }
-        // )
+            }
+        )
 
 
     }, [])
@@ -60,7 +60,7 @@ function DisplayCoin(props){
         return(
             <>
             <p>
-                coin info here
+                loading coin info...
             </p>
            
             </>

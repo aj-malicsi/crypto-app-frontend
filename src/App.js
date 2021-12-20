@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 // import { EMAChart } from './charts/EMAChart';
 import { MACDHistogram } from './charts/MACDHistogram';
@@ -15,19 +16,34 @@ function App() {
   
   console.log("app coin state =>", coin)
   return (
-    <>
+  <Routes>
+    <Route path="/" 
+    element={
     <CoinForm 
-    coin = {coin}
-    setCoin = {setCoin}
-    DisplayCoin = {DisplayCoin}
+      coin={coin}
+      setCoin = {setCoin}
+      />
+    } 
     />
+    <Route path="/display-coin"
+    element={
+      <DisplayCoin 
+      coin={coin}
+      setCoin = {setCoin}
+      />
+    }/>
+
+  </Routes>
+    
+   
+    
   
    
 
 
 
 
-    </>
+   
   );
 }
 
