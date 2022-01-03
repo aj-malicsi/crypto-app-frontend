@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import DailyCandles from '../charts/DailyCandles'
+
 
 
 
@@ -19,7 +21,7 @@ function DisplayCoin(props){
 
         var headersList = {
             'User-Agent': 'request'
-            
+
         }
 
         axios.get(url, {headers: headersList,
@@ -44,6 +46,7 @@ function DisplayCoin(props){
         var exchange_rate = parseFloat(coinInfo["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
 
         return(
+            <>
             <div>
             <p>{coinInfo["Realtime Currency Exchange Rate"]["2. From_Currency Name"]}</p>
             <p>{coinInfo["Realtime Currency Exchange Rate"]["1. From_Currency Code"]}</p>
@@ -52,6 +55,10 @@ function DisplayCoin(props){
             <p>{coinInfo["Realtime Currency Exchange Rate"]["7. Time Zone"]}</p> 
 
             </div>
+            <DailyCandles coin={props.coin}/>
+
+        
+            </>
         ) 
 
     }
