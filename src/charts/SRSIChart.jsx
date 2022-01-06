@@ -47,7 +47,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'RSI',
+      text: 'Stochastic RSI',
     },
     label:{
       display: false
@@ -82,12 +82,12 @@ export const data = {
   ],
 };
 
-export function RSIChart(props) {
+export function SRSIChart(props) {
 
-    const [rsiArr, setRsiArr] = useState([])
+    const [srsiArr, setSrsiArr] = useState([])
     const [dateArr, setDateArr] = useState([])
     var tempDateArr = []
-    var tempRsiArr = []
+    var tempSrsiArr = []
  
 
     useEffect( () =>{
@@ -118,7 +118,7 @@ export function RSIChart(props) {
               }
                 
             for(const rsiKey of Object.keys(info[key])){
-                if(tempRsiArr.length < 100){
+                if(tempSrsiArr.length < 100){
                   data.datasets[0]['data'].unshift(info[key][rsiKey])
                   tempRsiArr.unshift(info[key][rsiKey])
 
@@ -128,7 +128,7 @@ export function RSIChart(props) {
             }
                 }
                 // console.log(tempHistArr)
-                setRsiArr(tempRsiArr)
+                setSrsiArr(tempSrsiArr)
                 setDateArr(tempDateArr)
             
             }
@@ -147,5 +147,5 @@ export function RSIChart(props) {
       return <Line options={options} data={data} />;
   }
   else
-      return(<p>rsi line chart loading</p>)
+      return(<p>stochastic rsi line chart loading</p>)
 }

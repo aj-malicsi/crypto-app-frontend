@@ -8,6 +8,7 @@ import { RSIChart } from './charts/RSIChart';
 import DisplayCoin from './display/DisplayCoin';
 import CoinForm from './forms/CoinForm';
 import CandlestickExample from './sample_charts/CandlestickSample';
+import TradeForm from './trades/TradeForm';
 
 
 
@@ -25,6 +26,7 @@ function App() {
       />
     } 
     />
+
     <Route path="/display-coin"
     element={
       <DisplayCoin 
@@ -32,6 +34,10 @@ function App() {
       setCoin = {setCoin}
       />
     }/>
+
+    <Route path="/new-trade"
+    element={<TradeForm/>}
+    />
 
   </Routes>
     

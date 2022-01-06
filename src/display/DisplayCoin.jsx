@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import DailyCandles from '../charts/DailyCandles'
+import { RSIChart } from '../charts/RSIChart'
+import {DailyEMAChart} from '../charts/DailyEMAChart'
 
 
 
@@ -28,7 +30,7 @@ function DisplayCoin(props){
         
         }).then((response) =>{
             var info = response.data
-            console.log(response)
+            // console.log(response)
 
             if (info.Note === undefined){
                 // console.log(info["Realtime Currency Exchange Rate"]["1. From_Currency Code"])
@@ -55,7 +57,14 @@ function DisplayCoin(props){
             <p>{coinInfo["Realtime Currency Exchange Rate"]["7. Time Zone"]}</p> 
 
             </div>
-            <DailyCandles coin={props.coin}/>
+            {/* <DailyCandles coin={props.coin}/>
+            <div style={{height: "300px"}}>
+                <RSIChart coin={props.coin}/>
+            </div> */}
+            <div style={{height: "300px"}}>
+                <DailyEMAChart coin={props.coin}/>
+            </div>
+            
 
         
             </>
