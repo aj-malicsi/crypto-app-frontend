@@ -91,96 +91,16 @@ class DailyCandles extends Component {
 			
 
 				//default
-				// if(limit < 100){					
-				// 	// console.log(limit, date)
-				// 	limit+=1
-				// 	dataPoints.push({
-				// 		x: date,
-				// 		y: ohlc
-				// 	})
-				// }
-
-
 				if(limit < 100){					
 					// console.log(limit, date)
-					if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
-						console.log(date)
-						limit-=20
-					}
-					
 					limit+=1
 					dataPoints.push({
 						x: date,
 						y: ohlc
 					})
-
-					
-					
 				}
 
 
-				
-				// if(date.getFullYear() !== tradeDate.getFullYear()){
-				// 	// if(limit < 100){
-				// 	// 	console.log(limit)
-				// 	// 	console.log("date", date.getFullYear(), date.getMonth(), date.getDate())
-
-				// 	// }
-					
-				// 	if(date.getMonth() !== tradeDate.getMonth()){
-				// 		// console.log(limit)
-				// 		// console.log("date", date.getFullYear(), date.getMonth(), date.getDate())
-				// 		if(date.getDate() !== tradeDate.getDate()){
-				// 			// console.log(limit)
-				// 			// console.log("date", date.getFullYear(), date.getMonth(), date.getDate())
-				// 			// console.log("Tdate", tradeDate.getFullYear(), tradeDate.getMonth(), tradeDate.getDate())
-				// 			// console.log(tradeDate)
-				// 			if(limit < 100){					
-				// 				// console.log(limit, date)
-				// 				limit+=1
-				// 				dataPoints.push({
-				// 					x: date,
-				// 					y: ohlc
-				// 				})
-				// 			}
-
-				// 		}
-
-				// 	}
-					
-				// }
-				// if(date.getFullYear() !== tradeDate.getFullYear() && date.getMonth() !== tradeDate.getMonth() && date.getDate() !== tradeDate.getDate()){
-		
-				// 	console.log(limit)
-				// 	console.log(date)
-				// 	console.log(tradeDate)
-				// 	if(limit < 100){					
-				// 		// console.log(limit, date)
-				// 		dataPoints.push({
-				// 			x: date,
-				// 			y: ohlc
-				// 		})
-				// 	}
-
-				// }
-				// console.log(limit)
-				// if(limit < 100){
-				// 	if(date.getFullYear() !== tradeDate.getFullYear() && date.getMonth() !== tradeDate.getMonth() && date.getDate() !== tradeDate.getDate()){
-				// 		// console.log(limit)
-				// 		// console.log(date)
-				// 		// console.log(tradeDate)
-
-				// 		dataPoints.push({
-				// 			x: date,
-				// 			y: ohlc
-				// 		})
-				// 	}				
-				// 	// console.log(limit, date)
-				// 	// dataPoints.push({
-				// 	// 	x: date,
-				// 	// 	y: ohlc
-				// 	// })
-				// }
 				
 					
 				

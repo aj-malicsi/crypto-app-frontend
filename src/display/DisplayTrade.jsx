@@ -1,13 +1,22 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import DailyCandles from '../charts/DailyCandles'
+import TradeDailyCandles from '../charts/TradeDailyCandles'
 import { RSIChart } from '../charts/RSIChart'
 import {DailyEMAChart} from '../charts/DailyEMAChart'
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { TradeEMAChart } from '../charts/TradeEMAChart'
 
 
+function processDate(tradeDate){
+  let result = tradeDate.slice(0,10)
+
+  return result
+  
+
+
+}
 
 
 
@@ -19,7 +28,7 @@ function DisplayTrade(){
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [coin, setCoin] = useState()
-    const [dailyCandle, setDailyCandle] = useState()
+    const [tradeDate, setTradeDate] = useState()
     // axios.get(trade_url)
     
     
@@ -42,6 +51,9 @@ function DisplayTrade(){
         setTitle(response.data.title)
         setDescription(response.data.description)
         setCoin(response.data.coin)
+        setTradeDate(processDate(response.data.created_at))
+        // console.log(typeof (response.data.created_at))
+        
         // setDailyCandle(response.data.)
 
       })
@@ -49,17 +61,33 @@ function DisplayTrade(){
     }, [])
 
     
-
-    return(
+    if(coin !== undefined){
+      return(
         <>
-        Display Trade here
-       <div>
-         Title: {title}, Coin: {coin}, Description:{description}
-       </div>
-       <DailyCandles coin={coin}/>
+         Display Trade here, coin is working
+        <div>
+          Date created: {tradeDate},Title: {title}, Coin: {coin}, Description:{description}
+        </div>
+        {/* <TradeDailyCandles coin={coin}/> */}
+        <div style={{height: "300px"}}>
+        <TradeEMAChart coin={coin} tradeDate={tradeDate}/>
 
+        </div>
+        
         </>
-    )
+      )
+      
+
+
+    }
+
+    else
+      return(
+          <>
+          LOADING...
+
+          </>
+      )
    
         
 

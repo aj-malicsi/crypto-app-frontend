@@ -11,7 +11,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var dataPoints =[];
 
-class DailyCandles extends Component {
+class TradeDailyCandles extends Component {
 	render() {
 		const options = {
 			zoomEnabled: true,
@@ -48,6 +48,17 @@ class DailyCandles extends Component {
 	}
 	componentDidMount(){
 		var chart = this.chart;
+        console.log(this.props.coin)
+        
+
+		var coin = this.props.coin
+		var fiat = "USD"
+		var key = "KB26K4SV9OF3UUKK"
+		var cryptoUrl = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${coin}&market=${fiat}&apikey=${key}`
+		var headersList = {
+            'User-Agent': 'request'  
+        }
+
 
         axios.get(cryptoUrl, {headers: headersList,
         
@@ -61,8 +72,10 @@ class DailyCandles extends Component {
 			var info = data['Time Series (Digital Currency Daily)']
 			// console.log(info)
 			let limit = 0;
+			let currentDate = "2021-12-12"
+			let tradeDate = new Date(currentDate)
 			for(const key of Object.keys(info)){
-				
+				// console.log(key)
                 // dataPoints.push({y: key})
 				// console.log(info[key])
 				// console.log(key)
@@ -75,16 +88,41 @@ class DailyCandles extends Component {
 				)
 				// console.log(ohlc)
 				let date = new Date(key)
-				// console.log("key",key,"date", date)
+			
 
-				limit+=1
-				if(limit < 100){
-					dataPoints.push({
-						x: date,
-						y: ohlc
-					})
+				//default
+				// if(limit < 100){					
+				// 	// console.log(limit, date)
+				// 	limit+=1
+				// 	dataPoints.push({
+				// 		x: date,
+				// 		y: ohlc
+				// 	})
+				// }
 
+
+				if(limit < 100){					
+					// console.log(limit, date)
+					if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
+						console.log(limit, date)
+						// limit = limit + 99
+
+						dataPoints.push({
+							x: date,
+							y: ohlc
+						})
+					}
+
+					if(date <= tradeDate){
+						limit+=1
+						dataPoints.push({
+							x: date,
+							y: ohlc
+						})
+					}		
 				}
+
+				
 					
 				
 			}
@@ -101,6 +139,6 @@ class DailyCandles extends Component {
 	// 	this.chart.render()
 	// }
 }
-// module.exports = CandlestickExample;       
+    
 
-export default DailyCandles
+export default TradeDailyCandles
