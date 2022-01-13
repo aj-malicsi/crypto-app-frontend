@@ -105,7 +105,7 @@ class DailyCandles extends Component {
 					// console.log(limit, date)
 					if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
 						console.log(date)
-						limit+=99
+						limit-=20
 					}
 					
 					limit+=1
