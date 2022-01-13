@@ -11,13 +11,13 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var dataPoints =[];
 
-class CandlestickExample extends Component {
+class DailyCandles extends Component {
 	render() {
 		const options = {
 			zoomEnabled: true,
 			exportEnabled: true,
 			title: {
-				text: "Microsoft Corporation Stock Price - December 2017"
+				text: ""
 			},
 			axisX: {
 				valueFormatString: "YYYY MM DD H m s"
@@ -29,7 +29,7 @@ class CandlestickExample extends Component {
 			},
 			data: [{
 				type: "candlestick",
-				name: "Bitcoin Price",
+				name: "Price",
 				color: "green",
 				showInLegend: true,
 				yValueFormatString: "$#####.##",
@@ -48,42 +48,8 @@ class CandlestickExample extends Component {
 	}
 	componentDidMount(){
 		var chart = this.chart;
-		//hehe
 
-		var url = 'https://canvasjs.com/data/gallery/react/microsoft-stock-price.json'
-		var headersList = {
-            'User-Agent': 'request'  
-        }
-		//docu code
-		// axios.get(url, {headers: headersList,
-        
-        // }).then((response) =>{
-        //     console.log("response js",response.data)
-		// 	return response.data;
-                    
-        //     }
-        // ).then(function (data){
-		// 	for (var i = 0; i < data.length; i++) {
-		// 		dataPoints.push(
-		// 		{
-		// 			x: data[i].x,
-		// 			y: data[i].y
-		// 		});
-		// 	}
-		// 	console.log(dataPoints)
-		// 	chart.render();
-
-		// })
-
-
-		// my code
-		var coin = "BTC"
-		var fiat = "USD"
-		var interval = "5min"
-		var key = "KB26K4SV9OF3UUKK"
-		var cryptoUrl = `https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=${coin}&market=${fiat}&interval=${interval}&outputsize=full&apikey=${key}`
-		var sampleUrl = "https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=ETH&market=USD&interval=5min&outputsize=full&apikey=demo"
-		axios.get(cryptoUrl, {headers: headersList,
+        axios.get(cryptoUrl, {headers: headersList,
         
         }).then((response) =>{
             // console.log("api response",response.data)
@@ -91,24 +57,25 @@ class CandlestickExample extends Component {
                     
             }
         ).then(function (data){
-			var info = data['Time Series Crypto (5min)']
-			console.log(info)
+            console.log(data)
+			var info = data['Time Series (Digital Currency Daily)']
+			// console.log(info)
 			let limit = 0;
 			for(const key of Object.keys(info)){
 				
                 // dataPoints.push({y: key})
 				// console.log(info[key])
-				
 				// console.log(key)
+
 				let ohlc = []
-				ohlc.push(parseFloat(info[key]['1. open']), 
-				parseFloat(info[key]['2. high']), 
-				parseFloat(info[key]['3. low']), 
-				parseFloat(info[key]['4. close'])
+				ohlc.push(parseFloat(info[key]['1a. open (USD)']), 
+				parseFloat(info[key]['2a. high (USD)']), 
+				parseFloat(info[key]['3a. low (USD)']), 
+				parseFloat(info[key]['4a. close (USD)'])
 				)
 				// console.log(ohlc)
 				let date = new Date(key)
-				console.log("key",key,"date", date)
+				// console.log("key",key,"date", date)
 
 				limit+=1
 				if(limit < 100){
@@ -119,10 +86,6 @@ class CandlestickExample extends Component {
 
 				}
 					
-
-			
-				
-				
 				
 			}
 			console.log("data points axios",dataPoints)
@@ -140,4 +103,4 @@ class CandlestickExample extends Component {
 }
 // module.exports = CandlestickExample;       
 
-export default CandlestickExample
+export default DailyCandles

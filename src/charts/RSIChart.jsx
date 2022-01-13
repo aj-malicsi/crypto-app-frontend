@@ -33,6 +33,12 @@ ChartJS.register(
 
 
 export const options = {
+  maintainAspectRatio: false,
+  elements:{
+    point:{
+      radius: 2
+    }
+  },
   responsive: true,
   plugins: {
     legend: {
@@ -76,7 +82,7 @@ export const data = {
   ],
 };
 
-export function RSIChart() {
+export function RSIChart(props) {
 
     const [rsiArr, setRsiArr] = useState([])
     const [dateArr, setDateArr] = useState([])
@@ -86,7 +92,7 @@ export function RSIChart() {
 
     useEffect( () =>{
         const key = 'KB26K4SV9OF3UUKK'
-        var coin = "BTC"
+        var coin = props.coin
         var fiat = "USD"
         var interval = "daily"
         var series_type = "close"
@@ -106,11 +112,18 @@ export function RSIChart() {
             console.log(info)
          
             for(const key of Object.keys(info)){
+              if(tempDateArr.length < 100){
                 tempDateArr.unshift(key)
                 data.labels.unshift(key)
-            for(const rsiKey of Object.keys(info[key])){    
-                data.datasets[0]['data'].unshift(info[key][rsiKey])
-                tempRsiArr.unshift(info[key][rsiKey])
+              }
+                
+            for(const rsiKey of Object.keys(info[key])){
+                if(tempRsiArr.length < 100){
+                  data.datasets[0]['data'].unshift(info[key][rsiKey])
+                  tempRsiArr.unshift(info[key][rsiKey])
+
+                }    
+                
             
             }
                 }

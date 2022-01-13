@@ -1,11 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function CoinForm(props) {
+  let navigate = useNavigate()
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => {
       console.log(data.coin);
       props.setCoin(data.coin)
+      navigate("/display-coin")
   }
 
 
