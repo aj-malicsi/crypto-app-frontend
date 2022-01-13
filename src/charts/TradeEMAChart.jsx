@@ -80,7 +80,7 @@ export const data = {
 
 export function TradeEMAChart(props) {
 
-//   console.log("interval EMA =>",props.interval)
+// console.log("interval EMA =>",props.interval)
 // console.log(props.tradeDate)
 
 
@@ -89,6 +89,7 @@ export function TradeEMAChart(props) {
    const [ema25Arr, setEma25Arr] = useState([])
    const [dateArr, setDateArr] = useState([])
    const [interval, setInterval] = useState("daily")
+   const [chartDate, setChartDate] = useState(props.tradeDate)
    var tempDateArr = []
    var tempEmaArr = []
 
@@ -109,11 +110,13 @@ export function TradeEMAChart(props) {
         'User-Agent': 'request'
     }
 
-    console.log(props.tradeDate)
+    // console.log(props.tradeDate)
+    console.log(chartDate)
 
     // var dummy = "2021-12-12"
 
-    var tempDate = new Date(props.tradeDate)
+    // var tempDate = new Date(props.tradeDate)
+    var tempDate = new Date(chartDate)
     // var tempDate = new Date(dummy)
 
     console.log(tempDate)

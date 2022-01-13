@@ -7,6 +7,7 @@ import { MACDLineChart } from './charts/MACDLineChart';
 import { RSIChart } from './charts/RSIChart';
 import DisplayCoin from './display/DisplayCoin';
 import DisplayTrade from './display/DisplayTrade';
+import TradesList from './display/TradesList';
 import CoinForm from './forms/CoinForm';
 import CandlestickExample from './sample_charts/CandlestickSample';
 import TradeForm from './trades/TradeForm';
@@ -42,6 +43,10 @@ function App() {
 
     <Route path="/display-trade/:trade_id"
     element={<DisplayTrade/>}
+    />
+
+    <Route path="/my-trades" 
+    element={<TradesList />}
     />
 
   </Routes>

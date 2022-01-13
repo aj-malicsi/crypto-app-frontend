@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../display/NavBar";
 
 
 
@@ -18,6 +19,7 @@ export default function CoinForm(props) {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
+    <NavBar />
     <p>Search for a coin:</p>
     
     <form onSubmit={handleSubmit(onSubmit)}>

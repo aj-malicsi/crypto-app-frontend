@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
+import NavBar from "../display/NavBar";
 
 var fiat = "USD"
 var key = "KB26K4SV9OF3UUKK"
@@ -113,6 +114,7 @@ export default function TradeForm(props) {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
+    <NavBar />
     <p>Create a new Trade Entry:</p>
     
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -58,6 +58,8 @@ class TradeDailyCandles extends Component {
 		var headersList = {
             'User-Agent': 'request'  
         }
+		let currentDate = this.props.chartDate
+	
 
 
         axios.get(cryptoUrl, {headers: headersList,
@@ -72,7 +74,8 @@ class TradeDailyCandles extends Component {
 			var info = data['Time Series (Digital Currency Daily)']
 			// console.log(info)
 			let limit = 0;
-			let currentDate = "2021-12-12"
+			// let currentDate = "2021-12-12"
+			// let currentDate = this.props.tradeDate
 			let tradeDate = new Date(currentDate)
 			for(const key of Object.keys(info)){
 				// console.log(key)
