@@ -18,39 +18,6 @@ var ema7Arr = []
 var ema25Arr = []
 var dateArr = []
 
-// const key = 'KB26K4SV9OF3UUKK'
-// var coin = "BTC"
-// var fiat = "USD"
-// var interval = "daily"
-// var time_period =7
-// var url = `https://www.alphavantage.co/query?function=EMA&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=close&apikey=${key}`;
-
-
-// var headersList = {
-//     'User-Agent': 'request'
-// }
-
-// axios.get(url, {headers: headersList,
-    
-// }).then((response) =>{
-//     var info = response.data["Technical Analysis: EMA"]
-//     // console.log(response.data)
-
-//     if (info.Note === undefined){
-        
-//         for(const key of Object.keys(info)){
-//           dateArr.unshift(key)
-//           for(const emaKey of Object.keys(info[key])){ 
-//             emaArr.unshift(info[key][emaKey])
-//           }
-//         }
-//     }
-//     console.log(emaArr)   
-//     }
-    
-// )
-
-
 
 ChartJS.register(
   CategoryScale,
@@ -113,20 +80,27 @@ export const data = {
 
 export function DailyEMAChart(props) {
 
+  console.log("interval EMA =>",props.interval)
+
 
      
    const [ema7Arr, setEma7Arr] = useState([])
    const [ema25Arr, setEma25Arr] = useState([])
    const [dateArr, setDateArr] = useState([])
+   const [interval, setInterval] = useState(props.interval)
    var tempDateArr = []
    var tempEmaArr = []
+
  
     useEffect( () =>{
+
+  
+    console.log("use effect interval =>", interval)
      
     const key = 'KB26K4SV9OF3UUKK'
     var coin = "BTC"
     var fiat = "USD"
-    var interval = "daily"
+    // var interval = props.interval
     var time_period =7
     var url = `https://www.alphavantage.co/query?function=EMA&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=open&apikey=${key}`;
 
@@ -139,7 +113,7 @@ export function DailyEMAChart(props) {
         
     }).then((response) =>{
         var info = response.data["Technical Analysis: EMA"]
-        console.log("EMA 7 DATA", response.data)
+        // console.log("EMA 7 DATA", response.data)
 
         for(const key of Object.keys(info)){
           if(tempDateArr.length < 100){
@@ -173,7 +147,7 @@ export function DailyEMAChart(props) {
       
       }).then((response) =>{
           var info = response.data["Technical Analysis: EMA"]
-          console.log("EMA 25 DATA", response.data)
+          // console.log("EMA 25 DATA", response.data)
   
           for(const key of Object.keys(info)){
   
@@ -181,14 +155,14 @@ export function DailyEMAChart(props) {
               if(tempEma25Arr.length < 100){
                 data.datasets[1]['data'].unshift(info[key][emaKey])
                 tempEma25Arr.unshift(info[key][emaKey])
-                console.log(tempEma25Arr.length)
+                // console.log(tempEma25Arr.length)
     
               }  
             }
         }
         setEma25Arr(tempEma25Arr)
-        console.log(tempEma25Arr)
-        console.log(data.datasets[1]['data'])
+        // console.log(tempEma25Arr)
+        // console.log(data.datasets[1]['data'])
       })
 
       console.log(tempEma25Arr)
@@ -199,13 +173,13 @@ export function DailyEMAChart(props) {
 
 
   
-    },[])
+    },[interval])
 
 
 
      
   if(data.datasets[0]['data'].length > 1){
-    console.log(data)
+    // console.log(data)
       // console.log(data.labels)
       // console.log("data array length =>",data.datasets[0]['data'].length)
 

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import DailyCandles from '../charts/DailyCandles'
 import { RSIChart } from '../charts/RSIChart'
 import {DailyEMAChart} from '../charts/DailyEMAChart'
+import { useForm } from "react-hook-form";
 
 
 
@@ -11,6 +12,7 @@ import {DailyEMAChart} from '../charts/DailyEMAChart'
 function DisplayCoin(props){
 
     const [coinInfo, setCoinInfo] = useState()
+    const [interval, setInterval] = useState("daily")
 
 
 
@@ -43,6 +45,8 @@ function DisplayCoin(props){
 
     }, [])
 
+    console.log("interval display =>", interval)
+
 
     if(coinInfo !== undefined && coinInfo.Note === undefined ){
         var exchange_rate = parseFloat(coinInfo["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
@@ -57,13 +61,27 @@ function DisplayCoin(props){
             <p>{coinInfo["Realtime Currency Exchange Rate"]["7. Time Zone"]}</p> 
 
             </div>
+           
+           
+            
+            <button onClick={() => setInterval("5min")}>5m</button>
+            <button onClick={() => setInterval("15min")}>15m</button>
+            <button onClick={() => setInterval("30min")}>30m</button>
+            <button onClick={() => setInterval("60min")}>1h</button>
+            <button onClick={() => setInterval("daily")}>Daily</button>
+            
+            
+            
+            
             {/* <DailyCandles coin={props.coin}/>
             <div style={{height: "300px"}}>
                 <RSIChart coin={props.coin}/>
             </div> */}
             <div style={{height: "300px"}}>
-                <DailyEMAChart coin={props.coin}/>
+                <DailyEMAChart coin={props.coin} interval={interval}/>
             </div>
+
+            
             
 
         

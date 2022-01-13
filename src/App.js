@@ -6,6 +6,7 @@ import { MACDHistogram } from './charts/MACDHistogram';
 import { MACDLineChart } from './charts/MACDLineChart';
 import { RSIChart } from './charts/RSIChart';
 import DisplayCoin from './display/DisplayCoin';
+import DisplayTrade from './display/DisplayTrade';
 import CoinForm from './forms/CoinForm';
 import CandlestickExample from './sample_charts/CandlestickSample';
 import TradeForm from './trades/TradeForm';
@@ -37,6 +38,10 @@ function App() {
 
     <Route path="/new-trade"
     element={<TradeForm/>}
+    />
+
+    <Route path="/display-trade/:trade_id"
+    element={<DisplayTrade/>}
     />
 
   </Routes>
