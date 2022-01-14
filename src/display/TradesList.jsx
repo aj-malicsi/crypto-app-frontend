@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useState} from 'react'
 import { Link } from "react-router-dom"
+import NavBar from './NavBar'
 
 
 
@@ -35,6 +36,7 @@ export default function TradesList(props){
 
     return(
         <>
+        <NavBar />
         trades list
         {
         trades.map(trade => 

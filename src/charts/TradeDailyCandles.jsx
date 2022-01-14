@@ -61,78 +61,67 @@ class TradeDailyCandles extends Component {
 		let currentDate = this.props.chartDate
 	
 
-
-        axios.get(cryptoUrl, {headers: headersList,
+		if(dataPoints.length < 1){
+			axios.get(cryptoUrl, {headers: headersList,
         
-        }).then((response) =>{
-            // console.log("api response",response.data)
-			return response.data;
-                    
-            }
-        ).then(function (data){
-            console.log(data)
-			var info = data['Time Series (Digital Currency Daily)']
-			// console.log(info)
-			let limit = 0;
-			// let currentDate = "2021-12-12"
-			// let currentDate = this.props.tradeDate
-			let tradeDate = new Date(currentDate)
-			for(const key of Object.keys(info)){
-				// console.log(key)
-                // dataPoints.push({y: key})
-				// console.log(info[key])
-				// console.log(key)
-
-				let ohlc = []
-				ohlc.push(parseFloat(info[key]['1a. open (USD)']), 
-				parseFloat(info[key]['2a. high (USD)']), 
-				parseFloat(info[key]['3a. low (USD)']), 
-				parseFloat(info[key]['4a. close (USD)'])
-				)
-				// console.log(ohlc)
-				let date = new Date(key)
-			
-
-				//default
-				// if(limit < 100){					
-				// 	// console.log(limit, date)
-				// 	limit+=1
-				// 	dataPoints.push({
-				// 		x: date,
-				// 		y: ohlc
-				// 	})
-				// }
-
-
-				if(limit < 100){					
-					// console.log(limit, date)
-					if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
-						console.log(limit, date)
-						// limit = limit + 99
-
-						dataPoints.push({
-							x: date,
-							y: ohlc
-						})
-					}
-
-					if(date <= tradeDate){
-						limit+=1
-						dataPoints.push({
-							x: date,
-							y: ohlc
-						})
-					}		
+			}).then((response) =>{
+				// console.log("api response",response.data)
+				return response.data;
+						
 				}
-
+			).then(function (data){
+				console.log(data)
+				var info = data['Time Series (Digital Currency Daily)']
+				// console.log(info)
+				let limit = 0;
+				// let currentDate = "2021-12-12"
+				// let currentDate = this.props.tradeDate
+				let tradeDate = new Date(currentDate)
+				for(const key of Object.keys(info)){
+					// console.log(key)
+					// dataPoints.push({y: key})
+					// console.log(info[key])
+					// console.log(key)
+	
+					let ohlc = []
+					ohlc.push(parseFloat(info[key]['1a. open (USD)']), 
+					parseFloat(info[key]['2a. high (USD)']), 
+					parseFloat(info[key]['3a. low (USD)']), 
+					parseFloat(info[key]['4a. close (USD)'])
+					)
+					// console.log(ohlc)
+					let date = new Date(key)
 				
-					
-				
-			}
-			console.log("data points axios",dataPoints)
-			chart.render();
+	
+					if(limit < 100){					
+						// console.log(limit, date)
+						if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
+							console.log(limit, date)
+							// limit = limit + 99
+	
+							dataPoints.push({
+								x: date,
+								y: ohlc
+							})
+						}
+	
+						if(date <= tradeDate){
+							limit+=1
+							dataPoints.push({
+								x: date,
+								y: ohlc
+							})
+						}		
+					}
+						
+				}
+				console.log("data points axios",dataPoints)
+				chart.render();
+	
+			})
 
-		})
+		}
+        
 
 
 	} //componentdidmount end

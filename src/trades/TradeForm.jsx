@@ -4,63 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
 import NavBar from "../display/NavBar";
 
-var fiat = "USD"
-var key = "KB26K4SV9OF3UUKK"
-var apiHeadersList = {
-  'User-Agent': 'request',
-}
-
-
-function dailyCandleUpdate(tradeData){
-    // console.log("daily candle function", tradeData)
-    var coin = tradeData.trade.coin
-    var cryptoUrl = `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${coin}&market=${fiat}&apikey=${key}`
-    
-
-    axios.get(cryptoUrl, {headers: apiHeadersList,
-    }).then((response) =>{
-    // console.log("api response",response.data)
-    tradeData.trade.daily_candles = response.data  
-    return tradeData;  
-    })
-
-}
-
-function rsiUpdate(tradeData){
-    var coin = tradeData.trade.coin
-    var interval = "daily"
-    var time_period =7
-    var url = `https://www.alphavantage.co/query?function=RSI&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=close&apikey=${key}`;
-
-
-    axios.get(url, {headers: apiHeadersList,
-        
-    }).then((response) =>{
-      // console.log("api response",response.data)
-      tradeData.trade.rsi_data = response.data  
-      return tradeData; 
-    })
-
-}
-
-function emaUpdate(tradeData){
-  var coin = tradeData.trade.coin
-  var interval = "daily"
-  var time_period =7
-  var url = `https://www.alphavantage.co/query?function=EMA&symbol=${coin}${fiat}&interval=${interval}&time_period=${time_period}&series_type=close&apikey=${key}`;
-
-  axios.get(url, {headers: apiHeadersList,
-      
-  }).then((response) =>{
-      tradeData.trade.ema_data = response.data
-      return tradeData; 
-  })
-
-}
-
-
-  
-
 
 
 export default function TradeForm(props) {
@@ -72,16 +15,23 @@ export default function TradeForm(props) {
   const onSubmit = data => {
 
     // console.log(data.coin, data.title, data.description);
+    // console.log(typeof(data.entryPrice))
+
+    // console.log(typeof(convertToFloat(data.entryPrice)))
+
+    let entryPrice = parseFloat(data.entryPrice)
+    let exitPrice = parseFloat(data.exitPrice)
+    // console.log(typeof entryPrice, entryPrice)
+
+
     let tradeData = {
         trade: {
           title: data.title,
           description: data.description,
           coin: data.coin,
-          // daily_candles: {},
-          // rsi_data: {},
-          // ema_data: {},
-          //rsi
-          //ema
+          entry_price: entryPrice,
+          exit_price: exitPrice,
+
         }   
       }
 
@@ -126,6 +76,13 @@ export default function TradeForm(props) {
       <br/>
 
       <input defaultValue="Description" {...register("description")} />
+      <br/>
+
+      <input defaultValue="Entry Price" {...register("entryPrice")} />
+      <br/>
+
+      <input defaultValue="Exit Price" {...register("exitPrice")} />
+      <br/>
       
       {/* include validation with required or other standard HTML validation rules */}
       {/* <input {...register("exampleRequired", { required: true })} /> */}

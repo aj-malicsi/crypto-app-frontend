@@ -200,8 +200,6 @@ export function TradeEMAChart(props) {
       // console.log(ema7Arr.length, ema25Arr.length)
       // console.log(data.datasets[0]['data'])
       // console.log(data)
-
-
   
     },[interval])
 
