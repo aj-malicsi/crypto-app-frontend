@@ -46,9 +46,11 @@ class TradeDailyCandles extends Component {
 		</div>
 		);
 	}
-	componentDidMount(){
+	componentDidMount(prevProps){
 		var chart = this.chart;
-        console.log(this.props.coin)
+        // console.log(this.props.chartDate)
+		let currentDate = this.props.chartDate
+		console.log(currentDate)
         
 
 		var coin = this.props.coin
@@ -58,9 +60,9 @@ class TradeDailyCandles extends Component {
 		var headersList = {
             'User-Agent': 'request'  
         }
-		let currentDate = this.props.chartDate
+		// let currentDate = this.props.chartDate
 	
-
+		console.log(dataPoints.length)
 		if(dataPoints.length < 1){
 			axios.get(cryptoUrl, {headers: headersList,
         
@@ -74,8 +76,7 @@ class TradeDailyCandles extends Component {
 				var info = data['Time Series (Digital Currency Daily)']
 				// console.log(info)
 				let limit = 0;
-				// let currentDate = "2021-12-12"
-				// let currentDate = this.props.tradeDate
+			
 				let tradeDate = new Date(currentDate)
 				for(const key of Object.keys(info)){
 					// console.log(key)
@@ -97,7 +98,7 @@ class TradeDailyCandles extends Component {
 						// console.log(limit, date)
 						if(date.getFullYear() === tradeDate.getFullYear() && date.getMonth() === tradeDate.getMonth() && date.getDate() === tradeDate.getDate()){
 							console.log(limit, date)
-							// limit = limit + 99
+							limit+=1
 	
 							dataPoints.push({
 								x: date,

@@ -10,11 +10,6 @@ import { TradeEMAChart } from '../charts/TradeEMAChart'
 import NavBar from './NavBar'
 
 
-function processDate(tradeDate){
-  let result = tradeDate.slice(0,10)
-
-  return result
-}
 
 
 
@@ -28,6 +23,7 @@ function DisplayTrade(){
     const [description, setDescription] = useState()
     const [coin, setCoin] = useState()
     const [tradeDate, setTradeDate] = useState()
+    const [displayDate, setDisplayDate] = useState()
     const [entryPrice, setEntryPrice] = useState()
     const [exitPrice, setExitPrice] = useState()
     // axios.get(trade_url)
@@ -52,7 +48,10 @@ function DisplayTrade(){
         setTitle(response.data.title)
         setDescription(response.data.description)
         setCoin(response.data.coin)
-        setTradeDate(processDate(response.data.created_at))
+    
+        let convertDate = new Date(response.data.trade_date)
+        setDisplayDate(convertDate.toString())
+        setTradeDate(response.data.trade_date)
         setEntryPrice(response.data.entry_price)
         setExitPrice(response.data.exit_price)
         setId(response.data.id)
@@ -66,18 +65,35 @@ function DisplayTrade(){
 
     
     if(coin !== undefined && tradeDate !== undefined){
+      console.log(tradeDate)
       return(
         <>
         <NavBar />
-         Display Trade here, coin is working
         <div>
-          Date created: {tradeDate},Title: {title}, Coin: {coin}, Description:{description}, Entry Price: {entryPrice}, Exit Price: {exitPrice}
+          Date created: {displayDate} <br/>
+          Title: {title} <br/>
+          Coin: {coin} <br/>
+          Description:{description} <br/>
+          <br/>
+          Entry Price: {entryPrice} <br/>
+          Exit Price: {exitPrice} <br/>
+          Take Profit:<br/>
+          Stop Loss:<br/>
+          <br/>
+          Leverage:<br/>
+          Margin:<br/>
+          <br/>
+          Reason for buying: <br/>
+          Reason for Selling: <br/>
+
+
         </div>
-        <TradeDailyCandles coin={coin} chartDate ={tradeDate}/>
+        {/* <TradeDailyCandles coin={coin} chartDate ={tradeDate}/>
+
         <div style={{height: "300px"}}>
         <TradeEMAChart coin={coin} tradeDate={tradeDate}/>
 
-        </div>
+        </div> */}
         <Link to={`/edit-trade/${id}`}>Edit</Link>
         
         </>

@@ -206,7 +206,7 @@ export function TradeEMAChart(props) {
 
 
      
-  if(data.datasets[0]['data'].length > 1){
+  if(data.datasets[0]['data'].length > 1 && data.datasets[1]['data'].length > 1){
     // console.log(data)
       // console.log(data.labels)
       // console.log("data array length =>",data.datasets[0]['data'].length)

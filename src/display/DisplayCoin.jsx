@@ -5,6 +5,7 @@ import DailyCandles from '../charts/DailyCandles'
 import { RSIChart } from '../charts/RSIChart'
 import {DailyEMAChart} from '../charts/DailyEMAChart'
 import { useForm } from "react-hook-form";
+import NavBar from './NavBar'
 
 
 
@@ -53,6 +54,7 @@ function DisplayCoin(props){
 
         return(
             <>
+            <NavBar />
             <div>
             <p>{coinInfo["Realtime Currency Exchange Rate"]["2. From_Currency Name"]}</p>
             <p>{coinInfo["Realtime Currency Exchange Rate"]["1. From_Currency Code"]}</p>
@@ -73,10 +75,10 @@ function DisplayCoin(props){
             
             
             
-            {/* <DailyCandles coin={props.coin}/>
+            <DailyCandles coin={props.coin}/>
             <div style={{height: "300px"}}>
                 <RSIChart coin={props.coin}/>
-            </div> */}
+            </div>
             <div style={{height: "300px"}}>
                 <DailyEMAChart coin={props.coin} interval={interval}/>
             </div>

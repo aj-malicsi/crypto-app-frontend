@@ -40,7 +40,8 @@ export default function TradesList(props){
         trades list
         {
         trades.map(trade => 
-        <Link to={`/display-trade/${trade.id}`}> {trade.title} </Link>
+            <p><Link to={`/display-trade/${trade.id}`}> {trade.title} </Link></p>
+        
         
         ) 
         
