@@ -69,7 +69,7 @@ export default function TradeForm(props) {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
     <NavBar />
-    <p>Create a new Trade Entry: </p>
+    <p className="text-red-300">Create a new Trade Entry: </p>
     
     <form onSubmit={handleSubmit(onSubmit)}>
 
